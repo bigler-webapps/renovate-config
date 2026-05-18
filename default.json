@@ -8,7 +8,7 @@
   ],
   "timezone": "Europe/Zurich",
   "schedule": ["before 6am on monday"],
-  "prConcurrentLimit": 5,
+  "prConcurrentLimit": 10,
   "prHourlyLimit": 0,
   "labels": ["dependencies"],
   "baseBranches": ["develop"],
@@ -26,31 +26,34 @@
       "dependencyDashboardApproval": true
     },
     {
-      "description": "Group Django ecosystem updates",
-      "matchPackageNames": ["django", "djangorestframework"],
-      "matchPackagePrefixes": ["django-", "djangorestframework-", "drf-"],
-      "groupName": "django ecosystem"
+      "description": "Bundle all non-major npm updates into one weekly PR",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch", "pin"],
+      "groupName": "npm non-major"
     },
     {
-      "description": "Group MUI and Emotion packages",
-      "matchPackagePrefixes": ["@mui/", "@emotion/"],
-      "groupName": "mui"
+      "description": "Bundle all non-major Python updates into one weekly PR",
+      "matchManagers": ["pip_requirements", "pip-compile", "poetry", "pep621"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "python non-major"
     },
     {
-      "description": "Group lint tooling",
-      "matchPackagePrefixes": ["eslint", "@typescript-eslint/", "prettier"],
-      "groupName": "lint tooling"
+      "description": "Bundle all non-major Docker tag updates into one weekly PR",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin"],
+      "groupName": "docker non-major"
     },
     {
-      "description": "Group Vite tooling",
-      "matchPackagePrefixes": ["vite", "@vitejs/"],
-      "groupName": "vite"
+      "description": "Bundle all non-major GitHub Actions updates into one weekly PR",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin"],
+      "groupName": "github-actions"
     },
     {
-      "description": "Group React core packages",
-      "matchPackageNames": ["react", "react-dom"],
-      "matchPackagePrefixes": ["@types/react"],
-      "groupName": "react core"
+      "description": "Bundle all non-major Gradle / Maven updates into one weekly PR",
+      "matchManagers": ["gradle", "gradle-wrapper", "maven"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "java non-major"
     }
   ]
 }
