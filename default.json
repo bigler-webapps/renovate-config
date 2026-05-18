@@ -1,0 +1,56 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":enableVulnerabilityAlertsWithLabel(security)"
+  ],
+  "timezone": "Europe/Zurich",
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 0,
+  "labels": ["dependencies"],
+  "baseBranches": ["develop"],
+  "rangeStrategy": "bump",
+  "minimumReleaseAge": "3 days",
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "schedule": ["at any time"],
+    "minimumReleaseAge": "0 days"
+  },
+  "packageRules": [
+    {
+      "description": "Majors require manual approval via Dependency Dashboard",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Group Django ecosystem updates",
+      "matchPackageNames": ["django", "djangorestframework"],
+      "matchPackagePrefixes": ["django-", "djangorestframework-", "drf-"],
+      "groupName": "django ecosystem"
+    },
+    {
+      "description": "Group MUI and Emotion packages",
+      "matchPackagePrefixes": ["@mui/", "@emotion/"],
+      "groupName": "mui"
+    },
+    {
+      "description": "Group lint tooling",
+      "matchPackagePrefixes": ["eslint", "@typescript-eslint/", "prettier"],
+      "groupName": "lint tooling"
+    },
+    {
+      "description": "Group Vite tooling",
+      "matchPackagePrefixes": ["vite", "@vitejs/"],
+      "groupName": "vite"
+    },
+    {
+      "description": "Group React core packages",
+      "matchPackageNames": ["react", "react-dom"],
+      "matchPackagePrefixes": ["@types/react"],
+      "groupName": "react core"
+    }
+  ]
+}
