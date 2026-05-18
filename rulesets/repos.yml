@@ -1,0 +1,38 @@
+# Repos that receive branch rulesets via apply-rulesets workflow.
+#
+# Each entry: full GitHub slug (owner/repo) and which rulesets to apply.
+# Available rulesets are JSON files in this directory (without .json suffix).
+#
+# Apps: develop + main protected
+# Platform: main only (no develop branch model in those repos)
+
+repos:
+  # --- Apps ---
+  - slug: MichaBigler/hram
+    rulesets: [develop, main]
+  # - slug: MichaBigler/jg-ferien
+  #   rulesets: [develop, main]
+  # - slug: MichaBigler/kerzenziehen
+  #   rulesets: [develop, main]
+  # - slug: MichaBigler/innoservice
+  #   rulesets: [develop, main]
+  # - slug: MichaBigler/survey_app
+  #   rulesets: [develop, main]
+  # - slug: MichaBigler/survey_contact_app
+  #   rulesets: [develop, main]
+  # - slug: MichaBigler/reimbursements
+  #   rulesets: [develop, main]
+
+  # --- Platform / Libraries / Templates ---
+  # - slug: bigler-webapps/workflow-templates
+  #   rulesets: [main]
+  # - slug: MichaBigler/django-core-micha
+  #   rulesets: [main]
+  # - slug: MichaBigler/ui-core-micha
+  #   rulesets: [main]
+  # - slug: MichaBigler/webapp-management
+  #   rulesets: [main]
+  # - slug: MichaBigler/webapp-template
+  #   rulesets: [main]
+  # - slug: MichaBigler/webapp-management-template
+  #   rulesets: [main]

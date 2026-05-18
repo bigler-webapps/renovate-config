@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Opt-in preset: enables auto-merge for low-risk updates. Apps must extend this in addition to default.json and require green CI on the target branch.",
+  "description": "Opt-in preset: enables auto-merge for low-risk updates. Renovate watches CI on the PR itself and merges only when checks pass — no branch protection required.",
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
@@ -10,15 +10,13 @@
     {
       "description": "Auto-merge patch, pin, digest and lockfile updates",
       "matchUpdateTypes": ["patch", "pin", "digest", "lockFileMaintenance"],
-      "automerge": true,
-      "platformAutomerge": true
+      "automerge": true
     },
     {
       "description": "Auto-merge minor and patch dev dependency updates",
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "platformAutomerge": true
+      "automerge": true
     }
   ]
 }

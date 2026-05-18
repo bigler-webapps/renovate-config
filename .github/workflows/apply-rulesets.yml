@@ -1,0 +1,28 @@
+name: Apply Rulesets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'rulesets/**'
+      - 'scripts/apply_rulesets.py'
+      - '.github/workflows/apply-rulesets.yml'
+  workflow_dispatch:
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Apply rulesets
+        env:
+          GITHUB_TOKEN: ${{ secrets.RULESETS_TOKEN }}
+        run: python scripts/apply_rulesets.py
