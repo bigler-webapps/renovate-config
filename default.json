@@ -14,6 +14,7 @@
   "baseBranches": ["develop"],
   "rangeStrategy": "bump",
   "minimumReleaseAge": "3 days",
+  "ignorePaths": ["**/package-lock.json", "**/node_modules/**", "**/build/**"],
   "vulnerabilityAlerts": {
     "labels": ["security"],
     "schedule": ["at any time"],
@@ -54,6 +55,11 @@
       "matchManagers": ["gradle", "gradle-wrapper", "maven"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "java non-major"
+    },
+    {
+      "description": "Skip MUI v9 — new pricing model (~3x cost, per-app license). Stay on current major lines, keep receiving patches and minors.",
+      "matchPackagePrefixes": ["@mui/"],
+      "allowedVersions": "<9"
     }
   ]
 }

@@ -10,18 +10,18 @@ repos:
   # --- Apps ---
   - slug: MichaBigler/hram
     rulesets: [develop, main]
-  # - slug: MichaBigler/jg-ferien
-  #   rulesets: [develop, main]
-  # - slug: MichaBigler/kerzenziehen
-  #   rulesets: [develop, main]
-  # - slug: MichaBigler/innoservice
-  #   rulesets: [develop, main]
-  # - slug: MichaBigler/survey_app
-  #   rulesets: [develop, main]
-  # - slug: MichaBigler/survey_contact_app
-  #   rulesets: [develop, main]
-  # - slug: MichaBigler/reimbursements
-  #   rulesets: [develop, main]
+  - slug: MichaBigler/jg-ferien
+    rulesets: [develop, main]
+  - slug: MichaBigler/kerzenziehen
+    rulesets: [develop, main]
+  - slug: MichaBigler/innoservice
+    rulesets: [develop, main]
+  - slug: MichaBigler/survey_app
+    rulesets: [develop, main]
+  - slug: MichaBigler/survey_contact_app
+    rulesets: [develop, main]
+  - slug: MichaBigler/reimbursements
+    rulesets: [develop, main]
 
   # --- Platform / Libraries / Templates ---
   # - slug: bigler-webapps/workflow-templates
