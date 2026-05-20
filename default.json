@@ -13,7 +13,7 @@
   "labels": ["dependencies"],
   "baseBranches": ["develop"],
   "rangeStrategy": "bump",
-  "minimumReleaseAge": "3 days",
+  "minimumReleaseAge": "7 days",
   "ignorePaths": ["**/package-lock.json", "**/node_modules/**", "**/build/**"],
   "vulnerabilityAlerts": {
     "labels": ["security"],
