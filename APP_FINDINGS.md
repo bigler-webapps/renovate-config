@@ -10,7 +10,7 @@ Already addressed:
 
 ## P3 — Tracking
 
-### RENOVATE-NEW-automerge-no-infra-restriction — `auto-merge.json` allows infra-update auto-merge
+### S181 — RENOVATE-NEW-automerge-no-infra-restriction — `auto-merge.json` allows infra-update auto-merge
 **Severity:** P3
 **File:** `auto-merge.json:8`
 **Confidence:** medium
