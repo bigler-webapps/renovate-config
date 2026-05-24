@@ -1,11 +1,23 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Opt-in preset: auto-merge all non-major updates after green CI. Majors stay in the Dependency Dashboard for manual approval.",
+  "description": "Opt-in preset: auto-merge all non-major application-dependency updates after green CI. Majors stay in the Dependency Dashboard for manual approval. INFRA REPOS MUST NOT EXTEND THIS PRESET: docker images, docker-compose stacks, GitHub Actions SHAs, and Terraform providers are excluded so a future infra-repo opt-in cannot silently auto-merge supply-chain-relevant bumps. webapp-management and workflow-templates explicitly do not extend this file.",
   "packageRules": [
     {
-      "description": "Auto-merge all non-major updates",
+      "description": "Auto-merge all non-major updates after green CI.",
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
+    },
+    {
+      "description": "Infra managers (docker / docker-compose / github-actions / terraform / helmv3 / kubernetes) always require human review, even on minor/patch/pin/digest bumps. This override protects supply-chain-relevant bumps in any repo that opts into this preset by mistake.",
+      "matchManagers": [
+        "dockerfile",
+        "docker-compose",
+        "github-actions",
+        "terraform",
+        "helmv3",
+        "kubernetes"
+      ],
+      "automerge": false
     }
   ]
 }
