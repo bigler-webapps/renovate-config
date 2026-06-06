@@ -7,7 +7,7 @@
     ":enableVulnerabilityAlertsWithLabel(security)"
   ],
   "timezone": "Europe/Zurich",
-  "schedule": ["before 6am on monday"],
+  "schedule": ["before 6am on wednesday"],
   "prConcurrentLimit": 1,
   "prHourlyLimit": 0,
   "labels": ["dependencies"],
