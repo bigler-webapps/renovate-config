@@ -8,10 +8,10 @@
   ],
   "timezone": "Europe/Zurich",
   "schedule": ["before 6am on wednesday"],
-  "prConcurrentLimit": 1,
+  "prConcurrentLimit": 25,
   "prHourlyLimit": 0,
   "labels": ["dependencies"],
-  "baseBranches": ["develop"],
+  "baseBranchPatterns": ["develop"],
   "rangeStrategy": "bump",
   "minimumReleaseAge": "7 days",
   "ignorePaths": ["**/package-lock.json", "**/node_modules/**", "**/build/**"],
@@ -22,9 +22,9 @@
   },
   "packageRules": [
     {
-      "description": "Majors require manual approval via Dependency Dashboard",
+      "description": "Majors open as PRs (no Dependency Dashboard approval) and are merged only by the operator. Lower priority so a backlog of waiting majors never takes the slots from the weekly non-major groups.",
       "matchUpdateTypes": ["major"],
-      "dependencyDashboardApproval": true
+      "prPriority": -5
     },
     {
       "description": "Bundle all non-major npm updates into one weekly PR",
@@ -55,6 +55,18 @@
       "matchManagers": ["gradle", "gradle-wrapper", "maven"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "java non-major"
+    },
+    {
+      "description": "Internal shared cores: own non-major group. PAIRED with minimumReleaseAge 0 below and with the automerge:false override in auto-merge.json - with no soak, the weekly routine's changelog check is the only delay between publish and merge, so these must never auto-merge.",
+      "matchPackageNames": ["/^django[-_.]core[-_.]micha$/i", "/^@micha\\.bigler\\//"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "internal shared cores",
+      "prPriority": 10
+    },
+    {
+      "description": "Internal shared cores come from repos with mandatory independent review, so the seven-day soak buys nothing and starves consumers already on a recent release. PAIRED with automerge:false in auto-merge.json.",
+      "matchPackageNames": ["/^django[-_.]core[-_.]micha$/i", "/^@micha\\.bigler\\//"],
+      "minimumReleaseAge": "0 days"
     },
     {
       "description": "Skip MUI v9 — new pricing model (~3x cost, per-app license). Stay on current major lines, keep receiving patches and minors.",

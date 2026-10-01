@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Opt-in preset: auto-merge all non-major application-dependency updates after green CI. Majors stay in the Dependency Dashboard for manual approval. INFRA REPOS MUST NOT EXTEND THIS PRESET: docker images, docker-compose stacks, GitHub Actions SHAs, and Terraform providers are excluded so a future infra-repo opt-in cannot silently auto-merge supply-chain-relevant bumps. webapp-management and workflow-templates explicitly do not extend this file.",
+  "description": "Opt-in preset: auto-merge all non-major application-dependency updates after green CI. Majors open as PRs but are never auto-merged (operator merges). INFRA REPOS MUST NOT EXTEND THIS PRESET: docker images, docker-compose stacks, GitHub Actions SHAs, and Terraform providers are excluded so a future infra-repo opt-in cannot silently auto-merge supply-chain-relevant bumps. webapp-management and workflow-templates explicitly do not extend this file.",
   "packageRules": [
     {
       "description": "Auto-merge all non-major updates after green CI.",
@@ -17,6 +17,11 @@
         "helmv3",
         "kubernetes"
       ],
+      "automerge": false
+    },
+    {
+      "description": "Internal shared cores (django-core-micha, @micha.bigler/*) are never auto-merged: the weekly triage routine reads the changelog and merges them. PAIRED with minimumReleaseAge 0 in default.json. Must stay AFTER the blanket non-major rule above, or that rule re-enables auto-merge.",
+      "matchPackageNames": ["/^django[-_.]core[-_.]micha$/i", "/^@micha\\.bigler\\//"],
       "automerge": false
     }
   ]
