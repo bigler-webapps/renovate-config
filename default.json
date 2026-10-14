@@ -12,7 +12,6 @@
   "prHourlyLimit": 0,
   "labels": ["dependencies"],
   "baseBranchPatterns": ["develop"],
-  "rebaseWhen": "behind-base-branch",
   "rangeStrategy": "bump",
   "minimumReleaseAge": "7 days",
   "ignorePaths": ["**/package-lock.json", "**/node_modules/**", "**/build/**"],
