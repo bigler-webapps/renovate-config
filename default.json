@@ -12,6 +12,7 @@
   "prHourlyLimit": 0,
   "labels": ["dependencies"],
   "baseBranchPatterns": ["develop"],
+  "rebaseWhen": "behind-base-branch",
   "rangeStrategy": "bump",
   "minimumReleaseAge": "7 days",
   "ignorePaths": ["**/package-lock.json", "**/node_modules/**", "**/build/**"],
@@ -31,6 +32,12 @@
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["minor", "patch", "pin"],
       "groupName": "npm non-major"
+    },
+    {
+      "description": "@playwright/test and the Playwright image pinned in each app's ci.yml (customManagers below) are one dependency: one weekly PR moves both, so the CI image always matches the resolved test runner. Must stay AFTER the npm non-major rule, which would otherwise absorb the npm half. Majors are not listed here and keep the majors rule.",
+      "matchPackageNames": ["@playwright/test"],
+      "matchUpdateTypes": ["minor", "patch", "pin"],
+      "groupName": "playwright"
     },
     {
       "description": "Bundle all non-major Python updates into one weekly PR",
@@ -72,6 +79,20 @@
       "description": "Skip MUI v9 — new pricing model (~3x cost, per-app license). Stay on current major lines, keep receiving patches and minors.",
       "matchPackagePrefixes": ["@mui/"],
       "allowedVersions": "<9"
+    }
+  ],
+  "customManagers": [
+    {
+      "description": "The Playwright image in an app's ci.yml (e2e-playwright-image: mcr.microsoft.com/playwright:vX.Y.Z-noble) is read as the @playwright/test version, so Renovate updates it together with the npm dependency (see the playwright rule). The trailing comment that repeats the version is rewritten in the same edit when present.",
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)\\.github/workflows/ci\\.yml$/"],
+      "matchStrings": [
+        "(?<imagePrefix>e2e-playwright-image:\\s*mcr\\.microsoft\\.com/playwright:v)(?<currentValue>\\d+\\.\\d+\\.\\d+)(?<imageSuffix>-noble)(?:(?<commentPrefix>[ \\t]+#[^\\n]*?@playwright/test@)\\d+\\.\\d+\\.\\d+)?"
+      ],
+      "datasourceTemplate": "npm",
+      "depNameTemplate": "@playwright/test",
+      "versioningTemplate": "npm",
+      "autoReplaceStringTemplate": "{{{imagePrefix}}}{{{newValue}}}{{{imageSuffix}}}{{#if commentPrefix}}{{{commentPrefix}}}{{{newValue}}}{{/if}}"
     }
   ]
 }
