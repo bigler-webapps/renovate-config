@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Opt-in preset for shared libraries that publish packages consumed by other repositories. Shared libraries may extend this preset; applications must NOT.",
+  "packageRules": [
+    {
+      "description": "Widen npm runtime and peer dependency ranges so updates do not raise the minimum version promised to consumers.",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies", "peerDependencies"],
+      "rangeStrategy": "widen"
+    },
+    {
+      "description": "Widen Python runtime and optional dependency ranges so updates do not raise the minimum version promised to consumers.",
+      "matchManagers": ["pep621"],
+      "matchDepTypes": ["project.dependencies", "project.optional-dependencies"],
+      "rangeStrategy": "widen"
+    },
+    {
+      "description": "Keep test tooling in the test extra updating with today's bump behaviour; it is development tooling, not a consumer-facing library floor.",
+      "matchManagers": ["pep621"],
+      "matchPackageNames": ["pytest", "pytest-django", "pytest-asyncio"],
+      "rangeStrategy": "bump"
+    }
+  ]
+}
